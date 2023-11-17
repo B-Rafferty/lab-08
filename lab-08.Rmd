@@ -45,14 +45,20 @@ weather %>%
 
 1. Are there any missing values in our variable of interest `RainTomorrow`? If so, we filter them out and save the new dataset as `weather_noNA`. 
 
-```{r}
+```{r eval=FALSE}
+sum(is.na(weather$RainTomorrow))
 
+weather_noNA <- filter(weather, RainTomorrow, na.rm = TRUE)
 ```
 
 2. Which cities are the ones with more rain days? To do this, let's analyze the `RainToday` variable. 
 
 ```{r}
-
+weather %>% 
+  group_by(Location) %>% 
+  filter(RainToday == "Yes") %>% 
+  count(RainToday) %>%
+  arrange(desc(n))
 ```
 
 # Exercise 2: Logistic regression
